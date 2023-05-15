@@ -5,11 +5,11 @@ st.title("Perhitungan Parameter Lingkungan")
 
 with st.sidebar :
     Pilihan = option_menu(menu_title=None,  # required
-                        options=['Pendahuluan','Total Dissolved Solid','Total Suspended Solid','Total Solid','Kalkulator TDS','Kalkulator TSS','Kalkulator TS','About Us'],  # required
-                        icons=["house", "book", "book", "book", "calculator", "calculator", "calculator"],  # optional
+                        options=['Pendahuluan','Teori','Kalkulator','About Us'],  # required
+                        icons=["house", "book", "calculator"],  # optional
                         menu_icon="cast",  # optional
                         default_index=0,  # optional
-                        orientation="vertical",
+                        orientation="horizontal",
                         styles={
                             "container": {"padding": "0!important", "background-color": "bbd6b8"},
                             "icon": {"color": "green", "font-size": "25px"},
@@ -35,7 +35,7 @@ if (Pilihan == 'Pendahuluan'):
     
 
 #Teori TDS
-elif (Pilihan == 'Total Dissolved Solid'):
+elif (Pilihan == 'Teori'):
     
     st.title(":red[:droplet: TOTAL DISSOLVED SOLID :droplet:]")
     
@@ -83,8 +83,8 @@ B = Berat cawan kosong (mg) \n
     
     
 #Teori TSS
-elif (Pilihan == 'Total Suspended Solid'):
 
+    st.markdown('-----------')
     st.title(":green[:droplet: TOTAL SUSPENDED SOLID :droplet:]")
 
     st.header(":green[:microscope: Prinsip Kerja :microscope:]")
@@ -129,8 +129,8 @@ B = Berat cawan kosong (mg) \n
     
     
 #Teori TS
-elif (Pilihan == 'Total Solid'):
-
+    
+    st.markdown('-----------')
     st.title(":blue[:droplet: TOTAL SOLID :droplet:]")
 
     st.header(":blue[:microscope: Prinsip Kerja :microscope:]")
@@ -172,9 +172,16 @@ B = Berat cawan kosong (mg) \n
     st.header(':blue[:droplet: Baku Mutu Standar TS :droplet:]')
     st.markdown("""Baku mutu standar TS dapat bervariasi tergantung pada kebutuhan dan regulasi yang berlaku di suatu daerah atau negara. Namun, umumnya baku mutu standar TS ditetapkan dalam satuan mg/L atau ppm (bagian per juta) dan berkisar antara 500-1000 mg/L untuk air permukaan dan 2000-4000 mg/L untuk limbah domestik dan industri.""")
     
+
+#Databse
+    st.title(":orange[:1234: DATABASE :1234:]")
+    from PIL import Image
+    image = Image.open('database.jpg')
+    st.image(image, caption='database')
+    
     
 #Kalkulator TDS
-elif (Pilihan == 'Kalkulator TDS'):
+elif (Pilihan == 'Kalkulator'):
 
     st.title(""":red[Kalkulator TDS]""")
 
@@ -186,12 +193,15 @@ elif (Pilihan == 'Kalkulator TDS'):
 
     if tombol:
         nilai_TDS = (B-A) / V * 1000
-        st.success(f'Nilai TDS adalah {nilai_TDS}')
+        if 500 <= nilai_TDS <= 3000:
+            st.success(f'Nilai TDS memenuhi karena {nilai_TDS} masih dalam rentang normal')
+        else:
+            st.error(f'Nilai TDS tidak memenuhi kebersyaratan baku muku standar karena {nilai_TDS:.2f} di luar rentang normal')
     
     
 #Kalkulator TSS
-if (Pilihan == 'Kalkulator TSS'):
     
+    st.markdown('-----------')
     st.title(""":green[Perhitungan TSS]""")
 
     A = st.number_input('Masukkan nilai berat kertas saring (mg) atau berat cawan + kertas saring')
@@ -202,12 +212,15 @@ if (Pilihan == 'Kalkulator TSS'):
 
     if tombol:
         nilai_TSS = (B-A) / V * 1000
-        st.success(f'Nilai TSS adalah {nilai_TSS}')
+        if 30 <= nilai_TSS <= 300:
+            st.success(f'Nilai TSS memenuhi karena {nilai_TSS} masih dalam rentang normal')
+        else:
+            st.error(f'Nilai TSS tidak memenuhi kebersyaratan baku muku standar karena {nilai_TSS:.2f} di luar rentang normal')
         
         
 #Kalkulator TS
-if (Pilihan == 'Kalkulator TS'):
-
+    
+    st.markdown('-----------')
     st.title(':blue[Perhitungan TS]')
 
     A = st.number_input('Masukkan nilai berat cawan akhir + residu(mg)')
@@ -218,7 +231,10 @@ if (Pilihan == 'Kalkulator TS'):
 
     if tombol:
         nilai_TS = (A-B) / V * 1000
-        st.success(f'Nilai TS adalah {nilai_TS}')
+        if 500 <= nilai_TS <= 4000:
+            st.success(f'Nilai TS memenuhi karena {nilai_TS} masih dalam rentang normal')
+        else:
+            st.error(f'Nilai TS tidak memenuhi kebersyaratan baku muku standar karena {nilai_TS:.2f} di luar rentang normal')
         
         
         
