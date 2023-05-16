@@ -174,6 +174,7 @@ B = Berat cawan kosong (mg) \n
     
 
 #Databse
+    st.markdown('-----------')
     st.title(":orange[:1234: DATABASE :1234:]")
     from PIL import Image
     image = Image.open('database.jpg')
